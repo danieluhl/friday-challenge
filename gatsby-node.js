@@ -1,17 +1,17 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 const path = require('path');
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.onCreateNode = ({ node }) => {
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
-    // console.log(node.frontmatter.date);
-    // console.log(createFilePath({ node, getNode, basePath: `pages` }));
+    const slug = createFilePath({ node, getNode, basePath: `pages` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
   }
-};
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -21,8 +21,8 @@ exports.createPages = ({ graphql, actions }) => {
         allMarkdownRemark {
           edges {
             node {
-              frontmatter {
-                date
+              fields {
+                slug
               }
             }
           }
@@ -31,12 +31,10 @@ exports.createPages = ({ graphql, actions }) => {
     `).then((result) => {
       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         createPage({
-          path: `challenge/${node.frontmatter.date}`,
+          path: node.fields.slug,
           component: path.resolve(`./src/templates/challenge.js`),
           context: {
-            // Data passed to context is available
-            // in page queries as GraphQL variables.
-            date: node.frontmatter.date
+            slug: node.fields.slug
           }
         });
       });

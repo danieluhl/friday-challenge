@@ -4,7 +4,6 @@ import { Link, graphql } from 'gatsby';
 import Layout from '../components/layout';
 
 const IndexPage = (props) => {
-  console.log(props);
   return (
     <Layout>
       <h1>Friday Challenges</h1>
