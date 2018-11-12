@@ -3,11 +3,13 @@ import { Link, graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 
-const IndexPage = (props) => {
+const IndexPage = () => {
   return (
     <Layout>
-      <h1>Friday Challenges</h1>
-      <Link to="challenge">A Challenge</Link>
+      <h1>Archive</h1>
+      <Link to="challenges/2018-08-21">
+        2018-08-21: React Hooks - Stopwatch
+      </Link>
     </Layout>
   );
 };

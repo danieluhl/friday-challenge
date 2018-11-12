@@ -1,18 +1,18 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 
-const ChallengePage = ({data}) => {
-  const { frontmatter, html } = data.markdownRemark
-  const { title } = frontmatter
+const ChallengePage = ({ data }) => {
+  const { frontmatter, html } = data.markdownRemark;
+  const { title } = frontmatter;
   return (
     <Layout>
       <h1>{title}</h1>
       <section dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
-  )
-}
+  );
+};
 
 export default ChallengePage;
 
@@ -25,4 +25,4 @@ export const challengePageQuery = graphql`
       }
     }
   }
-`
+`;
