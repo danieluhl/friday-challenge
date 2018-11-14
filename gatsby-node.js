@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
@@ -14,7 +14,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 }
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
   return new Promise((resolve, reject) => {
     graphql(`
       {
@@ -28,17 +28,17 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then((result) => {
+    `).then(result => {
       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
           component: path.resolve(`./src/templates/challenge.js`),
           context: {
-            slug: node.fields.slug
-          }
-        });
-      });
-      resolve();
-    });
-  });
-};
+            slug: node.fields.slug,
+          },
+        })
+      })
+      resolve()
+    })
+  })
+}

@@ -1,32 +1,43 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
+import React from 'react'
+import { Link, graphql } from 'gatsby'
 
-import Layout from '../components/layout';
+import Layout from '../components/layout'
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
+  const { edges } = data.allMarkdownRemark
   return (
     <Layout>
       <h1>Archive</h1>
-      <Link to="challenges/2018-08-21">
-        2018-08-21: React Hooks - Stopwatch
-      </Link>
+      {edges.map(({ node }) => (
+        <Link to={node.fields.slug}>
+          <h3>
+            <span>[{node.frontmatter.date}]</span> {node.frontmatter.title}
+          </h3>
+        </Link>
+      ))}
     </Layout>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
 
-export const query = graphql`
+export const indexQuery = graphql`
   query {
-    allFile {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      totalCount
       edges {
         node {
-          relativePath
-          prettySize
-          extension
-          birthTime(fromNow: true)
+          id
+          frontmatter {
+            title
+            date(formatString: "MMMM DD, YYYY")
+          }
+          fields {
+            slug
+          }
+          excerpt
         }
       }
     }
   }
-`;
+`
