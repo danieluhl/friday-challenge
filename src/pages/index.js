@@ -1,25 +1,25 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
+import React from 'react';
+import { Link, graphql } from 'gatsby';
 
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 
 const IndexPage = ({ data }) => {
-  const { edges } = data.allMarkdownRemark
+  const { edges } = data.allMarkdownRemark;
   return (
     <Layout>
       <h1>Archive</h1>
       {edges.map(({ node }) => (
-        <Link to={node.fields.slug}>
+        <Link to={node.fields.slug} key={node.frontmatter.title}>
           <h3>
             <span>[{node.frontmatter.date}]</span> {node.frontmatter.title}
           </h3>
         </Link>
       ))}
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
 export const indexQuery = graphql`
   query {
@@ -40,4 +40,4 @@ export const indexQuery = graphql`
       }
     }
   }
-`
+`;
