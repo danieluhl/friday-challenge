@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
+import Search from './search';
 import './layout.css';
 
 const Layout = ({ children }) => (
@@ -15,7 +16,7 @@ const Layout = ({ children }) => (
             title
             algolia {
               appId
-              searchOnlyApiKey
+              apiKey
               indexName
             }
           }
@@ -23,7 +24,7 @@ const Layout = ({ children }) => (
       }
     `}
     render={({ site: { siteMetadata: { title, algolia } } }) => (
-      <React.Fragment>
+      <>
         <Helmet
           title={title}
           meta={[
@@ -33,7 +34,8 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header siteTitle={title} algolia={algolia} />
+        <Header siteTitle={title} />
+        <Search {...algolia} />
         <div
           style={{
             margin: '0 auto',
@@ -44,7 +46,7 @@ const Layout = ({ children }) => (
         >
           {children}
         </div>
-      </React.Fragment>
+      </>
     )}
   />
 );

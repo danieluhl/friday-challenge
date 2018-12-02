@@ -1,16 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import {
-  InstantSearch,
-  SearchBox,
-  Hits,
-  Stats,
-  Pagination
-} from 'react-instantsearch/dom';
-import Hit from './hit';
 
-const Header = ({ siteTitle, algolia }) => {
-  return (
+const Header = ({ siteTitle }) => {
+    return (
     <div
       style={{
         background: 'rebeccapurple',
@@ -35,21 +27,6 @@ const Header = ({ siteTitle, algolia }) => {
             {siteTitle}
           </Link>
         </h1>
-        <div className="search">
-          {algolia &&
-          algolia.appId && (
-            <InstantSearch
-              appId={algolia.appId}
-              apiKey={algolia.searchOnlyApiKey}
-              indexName={algolia.indexName}
-            >
-              <SearchBox translations={{ placeholder: 'Search' }} />
-              <Stats />
-              <Hits hitComponent={Hit} />
-              <Pagination />
-            </InstantSearch>
-          )}
-        </div>
       </div>
     </div>
   );

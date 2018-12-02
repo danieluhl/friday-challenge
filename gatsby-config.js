@@ -52,9 +52,9 @@ module.exports = {
     title: `Friday Challenges`,
     algolia: {
       appId: process.env.ALGOLIA_APPID,
-      searchOnlyApiKey: process.env.ALGOLIA_APIKEY,
+      apiKey: process.env.ALGOLIA_APIKEY,
       indexName: `challenges`
-    }
+  }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
