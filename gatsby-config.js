@@ -23,7 +23,8 @@ const query = `{
 const queries = [
   {
     query,
-    indexName: `challenges`
+    indexName: `challenges`,
+    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => node),
   }
 ];
 
@@ -31,13 +32,11 @@ module.exports = {
   siteMetadata: {
     title: 'Friday Challenges',
     algolia: {
-      appId: process.env.ALGOLIA_APP_ID ? process.env.ALGOLIA_APP_ID : '',
-      searchOnlyApiKey: process.env.ALGOLIA_API_KEY
-        ? process.env.ALGOLIA_API_KEY
+      appId: process.env.ALGOLIA_APPID ? process.env.ALGOLIA_APPID : '',
+      searchOnlyApiKey: process.env.ALGOLIA_APIKEY
+        ? process.env.ALGOLIA_APIKEY
         : '',
-      indexName: process.env.ALGOLIA_INDEX_NAME
-        ? process.env.ALGOLIA_INDEX_NAME
-        : ''
+      indexName: 'challenges'
     }
   },
   plugins: [
@@ -66,9 +65,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_API_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME,
+        appId: process.env.ALGOLIA_APPID,
+        apiKey: process.env.ALGOLIA_APIKEY,
         queries
       }
     }
