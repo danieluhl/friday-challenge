@@ -4731,6 +4731,13 @@ gatsby-source-filesystem@^2.0.4:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
+gatsby-transformer-remark-plaintext@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark-plaintext/-/gatsby-transformer-remark-plaintext-1.0.2.tgz#eaf05651a68e181e542c80112625c6fba3a5bcb7"
+  integrity sha512-r3zBigh5/5knOxzwJzGHLzXRR9+HKnuO2idpa6V/ZnP0V2Mvf34wAGsZB/VaUQOScF/DQKFnNZDLbziIkQapOw==
+  dependencies:
+    strip-markdown "^3.0.2"
+
 gatsby-transformer-remark@^2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.1.7.tgz#09abb259666c819d01b9832a8e9e49546c89a895"
@@ -9855,6 +9862,11 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+
+strip-markdown@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/strip-markdown/-/strip-markdown-3.0.3.tgz#93b4526abe32a1d69e5ca943f4d9ba25c01a4d48"
+  integrity sha512-G2DSM9wy3PWxY3miAibWpsTqZgXLXgRoq0yVyaVs9O7FDGEwPO6pmSE8CyzHhU88Z2w1dkFqFmWUklFNsQKwqg==
 
 style-loader@^0.21.0:
   version "0.21.0"
