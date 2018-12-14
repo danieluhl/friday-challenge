@@ -7,6 +7,7 @@
     "Spencer Sanchez <spsanchez@wayfair.com>"
   ],
   "dependencies": {
+    "dompurify": "^1.0.8",
     "gatsby": "^2.0.19",
     "gatsby-plugin-algolia": "^0.3.0",
     "gatsby-plugin-manifest": "^2.0.5",

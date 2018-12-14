@@ -1,20 +1,25 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
+import purify from 'dompurify';
 
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+import Tag from '../components/tag';
 
 const ChallengePage = ({ data }) => {
-  const { frontmatter, html } = data.markdownRemark
-  const { title } = frontmatter
+  const { frontmatter, html } = data.markdownRemark;
+  const { title, tags } = frontmatter;
+  const tagText = tags.split(/\s*,\s*/);
+  const sanitizedHtml = purify.sanitize(html);
   return (
     <Layout>
       <h1>{title}</h1>
-      <section dangerouslySetInnerHTML={{ __html: html }} />
+      {tagText.map((text) => <Tag key={text} text={text} />)}
+      <section dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
     </Layout>
-  )
-}
+  );
+};
 
-export default ChallengePage
+export default ChallengePage;
 
 export const challengePageQuery = graphql`
   query($slug: String!) {
@@ -22,7 +27,8 @@ export const challengePageQuery = graphql`
       html
       frontmatter {
         title
+        tags
       }
     }
   }
-`
+`;
