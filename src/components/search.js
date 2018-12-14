@@ -23,22 +23,43 @@ const Result = ({ hit }) => (
     <Highlight attribute="tags" hit={hit} />
   </a>
 );
+class Search extends React.Component {
+  state = {
+    showResults: false
+  };
 
-const Search = ({ appId, apiKey, indexName }) => (
-  <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem'
-      }}
-    >
-      <SearchBox />
-      <RefinementList attribute="language" />
-      <Hits hitComponent={Result} />
-      <Stats />
-    </div>
-  </InstantSearch>
-);
+  handleChange = (e) => {
+    this.setState({
+      showResults: e.target.value.length > MIN_CHAR_COUNT
+    });
+  };
+
+  handleReset = () => this.setState({ showResults: false });
+
+  render() {
+    const { appId, apiKey, indexName } = this.props;
+    return (
+      <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
+        <div
+          style={{
+            margin: '0 auto',
+            maxWidth: 960,
+            padding: '1.45rem 1.0875rem'
+          }}
+        >
+          <SearchBox onChange={this.handleChange} onReset={this.handleReset} />
+
+          {this.state.showResults && (
+            <div>
+              <RefinementList attribute="language" />
+              <Hits hitComponent={Result} />
+              <Stats />
+            </div>
+          )}
+        </div>
+      </InstantSearch>
+    );
+  }
+}
 
 export default Search;
