@@ -34,7 +34,7 @@ const Search = ({ appId, apiKey, indexName }) => (
       }}
     >
       <SearchBox />
-      <RefinementList attributeName="language" />
+      <RefinementList attribute="language" />
       <Hits hitComponent={Result} />
       <Stats />
     </div>
