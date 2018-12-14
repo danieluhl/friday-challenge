@@ -2,8 +2,14 @@ require(`dotenv`).config({
   path: `.env`
 });
 
-if (!process.env.ALGOLIA_APPID || !process.env.ALGOLIA_APIKEY || !process.env.ALGOLIA_ADMIN_APIKEY) {
-  throw new Error('Missing Algolia config')
+if (
+  !process.env.ALGOLIA_APPID ||
+  !process.env.ALGOLIA_APIKEY ||
+  !process.env.ALGOLIA_ADMIN_APIKEY
+) {
+  throw new Error(
+    'Missing Algolia environment variables (.env file): ALGOLIA_APPID, ALGOLIA_APIKEY, ALGOLIA_ADMIN_APIKEY'
+  );
 }
 
 // gatsby-config.js
@@ -30,20 +36,21 @@ const queries = [
   {
     query,
     indexName: `challenges`,
-    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => {
-      const { frontmatter, fields, plainText } = node
-      const { title, date, language, tags } = frontmatter
-      const { slug } = fields
-      return {
-        date,
-        language,
-        objectID: slug,
-        plainText,
-        slug,
-        tags,
-        title
-      }
-    }),
+    transformer: ({ data }) =>
+      data.allMarkdownRemark.edges.map(({ node }) => {
+        const { frontmatter, fields, plainText } = node;
+        const { title, date, language, tags } = frontmatter;
+        const { slug } = fields;
+        return {
+          date,
+          language,
+          objectID: slug,
+          plainText,
+          slug,
+          tags,
+          title
+        };
+      })
   }
 ];
 
@@ -54,13 +61,14 @@ module.exports = {
       appId: process.env.ALGOLIA_APPID,
       apiKey: process.env.ALGOLIA_APIKEY,
       indexName: `challenges`
-  }
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-remark-plaintext`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
