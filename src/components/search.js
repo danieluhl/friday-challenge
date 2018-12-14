@@ -5,6 +5,7 @@ import {
   InstantSearch,
   SearchBox,
   Stats,
+  RefinementList,
 } from 'react-instantsearch-dom'
 
 // @TODO remove this - it's canned styling
@@ -17,9 +18,9 @@ const Result = ({ hit }) => (
   <a style={{ marginTop: '10px' }} href={hit.slug}>
     <div>
       <Highlight attribute="title" hit={hit} />
-      <Highlight attribute="date" hit={hit} />
-      <Highlight attribute="tags" hit={hit} />
     </div>
+    <Highlight attribute="date" hit={hit} />
+    <Highlight attribute="tags" hit={hit} />
     <small>{hit.date}</small>
     <div>{hit.tags}</div>
   </a>
@@ -50,8 +51,10 @@ class Search extends React.Component {
           }}
         >
           <SearchBox onChange={this.handleChange} onReset={this.handleReset} />
+
           {this.state.showResults && (
             <div>
+              <RefinementList attribute="language" />
               <Hits hitComponent={Result} />
               <Stats />
             </div>

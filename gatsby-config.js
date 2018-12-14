@@ -7,7 +7,9 @@ if (
   !process.env.ALGOLIA_APIKEY ||
   !process.env.ALGOLIA_ADMIN_APIKEY
 ) {
-  throw new Error('Missing Algolia config')
+  throw new Error(
+    'Missing Algolia environment variables (.env file): ALGOLIA_APPID, ALGOLIA_APIKEY, ALGOLIA_ADMIN_APIKEY'
+  )
 }
 
 // gatsby-config.js
@@ -80,6 +82,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-remark-plaintext`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
