@@ -5,6 +5,9 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
 import Search from './search';
+import {
+  Container
+} from './layout-constants';
 import './layout.css';
 
 const Layout = ({ children }) => (
@@ -36,16 +39,9 @@ const Layout = ({ children }) => (
         </Helmet>
         <Header siteTitle={title} />
         <Search {...algolia} />
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0
-          }}
-        >
+        <Container>
           {children}
-        </div>
+        </Container>
       </>
     )}
   />

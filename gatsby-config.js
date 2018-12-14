@@ -68,6 +68,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-remark-plaintext`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
