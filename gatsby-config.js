@@ -69,6 +69,10 @@ module.exports = {
         name: 'about',
         link: '/about',
       },
+      {
+        name: 'archives',
+        link: '/archives',
+      },
     ],
   },
   plugins: [
