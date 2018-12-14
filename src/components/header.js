@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import { Link } from 'gatsby';
-const netlifyIdentity = require("netlify-identity-widget");
+import React, { Component } from 'react'
+import { Link } from 'gatsby'
+import netlifyIdentity from 'netlify-identity-widget'
 
 class Header extends Component {
-  componentDidMount(){
+  componentDidMount() {
     netlifyIdentity.init({
-      APIUrl: "https://www.friday-challenge.com/.netlify/identity"
-    });
+      APIUrl: 'https://www.friday-challenge.com/.netlify/identity',
+    })
+    netlifyIdentity.on('login', user => {
+      this.setState({ user })
+    })
+    netlifyIdentity.on('logout', () => this.setState({ user: null }))
   }
 
   render() {
@@ -15,15 +19,14 @@ class Header extends Component {
       <div
         style={{
           background: 'rebeccapurple',
-          marginBottom: '1.45rem'
+          marginBottom: '1.45rem',
         }}
       >
-
         <div
           style={{
             margin: '0 auto',
             maxWidth: 960,
-            padding: '1.45rem 1.0875rem'
+            padding: '1.45rem 1.0875rem',
           }}
         >
           <h1 style={{ margin: 0 }}>
@@ -31,17 +34,17 @@ class Header extends Component {
               to="/"
               style={{
                 color: 'white',
-                textDecoration: 'none'
+                textDecoration: 'none',
               }}
             >
               {siteTitle}
             </Link>
           </h1>
-          <div data-netlify-identity-menu></div>
+          <div data-netlify-identity-menu />
         </div>
       </div>
     )
   }
-};
+}
 
-export default Header;
+export default Header
