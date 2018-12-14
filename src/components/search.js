@@ -4,7 +4,8 @@ import {
   Hits,
   InstantSearch,
   SearchBox,
-  Stats
+  Stats,
+  RefinementList
 } from 'react-instantsearch-dom';
 
 // @TODO remove this - it's canned styling
@@ -33,6 +34,7 @@ const Search = ({ appId, apiKey, indexName }) => (
       }}
     >
       <SearchBox />
+      <RefinementList attributeName="language" />
       <Hits hitComponent={Result} />
       <Stats />
     </div>
