@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import styled from "styled-components";
 
 import Layout from '../components/layout';
+
+const Title = styled.h2`
+  font-family: 'Press Start 2P';
+  color: teal;
+`;
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark;
   return (
     <Layout>
-      <h1>Archive</h1>
+      <Title>Past Challenges</Title>
       {edges.map(({ node }) => (
         <Link to={node.fields.slug} key={node.frontmatter.title}>
           <h3>

@@ -61,6 +61,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-remark-plaintext`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -86,6 +87,15 @@ module.exports = {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_APIKEY,
         queries
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Press Start 2P`,
+          `Roboto\: 400`
+        ]
       }
     }
   ]
