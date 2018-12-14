@@ -1,8 +1,12 @@
 require(`dotenv`).config({
-  path: `.env`
-});
+  path: `.env`,
+})
 
-if (!process.env.ALGOLIA_APPID || !process.env.ALGOLIA_APIKEY || !process.env.ALGOLIA_ADMIN_APIKEY) {
+if (
+  !process.env.ALGOLIA_APPID ||
+  !process.env.ALGOLIA_APIKEY ||
+  !process.env.ALGOLIA_ADMIN_APIKEY
+) {
   throw new Error('Missing Algolia config')
 }
 
@@ -24,28 +28,29 @@ const query = `{
       }
     }
   }
-}`;
+}`
 
 const queries = [
   {
     query,
     indexName: `challenges`,
-    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => {
-      const { frontmatter, fields, plainText } = node
-      const { title, date, language, tags } = frontmatter
-      const { slug } = fields
-      return {
-        date,
-        language,
-        objectID: slug,
-        plainText,
-        slug,
-        tags,
-        title
-      }
-    }),
-  }
-];
+    transformer: ({ data }) =>
+      data.allMarkdownRemark.edges.map(({ node }) => {
+        const { frontmatter, fields, plainText } = node
+        const { title, date, language, tags } = frontmatter
+        const { slug } = fields
+        return {
+          date,
+          language,
+          objectID: slug,
+          plainText,
+          slug,
+          tags,
+          title,
+        }
+      }),
+  },
+]
 
 module.exports = {
   siteMetadata: {
@@ -53,8 +58,18 @@ module.exports = {
     algolia: {
       appId: process.env.ALGOLIA_APPID,
       apiKey: process.env.ALGOLIA_APIKEY,
-      indexName: `challenges`
-  }
+      indexName: `challenges`,
+    },
+    menuLinks: [
+      {
+        name: 'home',
+        link: '/',
+      },
+      {
+        name: 'about',
+        link: '/about',
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -70,23 +85,23 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
-      }
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/src/`
-      }
+        path: `${__dirname}/src/`,
+      },
     },
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_APIKEY,
-        queries
-      }
-    }
-  ]
-};
+        queries,
+      },
+    },
+  ],
+}
