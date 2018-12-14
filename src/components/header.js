@@ -1,34 +1,50 @@
-import React from 'react';
-import {
-  Container,
-  Link
-} from './layout-constants';
-import {
-  PageTitle
-} from './headings';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import { Link } from 'gatsby'
+import netlifyIdentity from 'netlify-identity-widget'
 
-const Wrapper = styled.div`
-  background: #654ea3;
-  background: -webkit-linear-gradient(to right, #654ea3, #9149f4);
-  background: linear-gradient(to right, #654ea3, #9149f4);
-  margin-bottom: 1.45rem;
-`;
+class Header extends Component {
+  componentDidMount() {
+    netlifyIdentity.init({
+      APIUrl: 'https://www.friday-challenge.com/.netlify/identity',
+    })
+    netlifyIdentity.on('login', user => {
+      this.setState({ user })
+    })
+    netlifyIdentity.on('logout', () => this.setState({ user: null }))
+  }
 
-const Header = ({ siteTitle }) => {
-  return (
-    <Wrapper>
-      <Container>
-        <PageTitle>
-          <Link to="/">
-            {siteTitle}
-          </Link>
-        </PageTitle>
-        {/* Not final copy! */}
-        <p>Keep your Javascript skills sharp with these weekly brain teasers</p>
-      </Container>
-    </Wrapper>
-  );
-};
+  render() {
+    const { siteTitle } = this.props
+    return (
+      <div
+        style={{
+          background: 'rebeccapurple',
+          marginBottom: '1.45rem',
+        }}
+      >
+        <div
+          style={{
+            margin: '0 auto',
+            maxWidth: 960,
+            padding: '1.45rem 1.0875rem',
+          }}
+        >
+          <h1 style={{ margin: 0 }}>
+            <Link
+              to="/"
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+              }}
+            >
+              {siteTitle}
+            </Link>
+          </h1>
+          <div data-netlify-identity-menu />
+        </div>
+      </div>
+    )
+  }
+}
 
-export default Header;
+export default Header
