@@ -1,12 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
-import Header from './header'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { StaticQuery, graphql } from 'gatsby';
 import SiteNav from './site_nav'
-import Search from './search'
-import { Container } from './layout-constants'
-import './layout.css'
+import Header from './header';
+import Search from './search';
+import {
+  Container
+} from './layout-constants';
+import './layout.css';
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -46,7 +48,9 @@ const Layout = ({ children }) => (
         <Header siteTitle={title} />
         <SiteNav links={menuLinks} />
         <Search {...algolia} />
-        <Container>{children}</Container>
+        <Container>
+          {children}
+        </Container>
       </>
     )}
   />

@@ -56,7 +56,7 @@ const queries = [
 
 module.exports = {
   siteMetadata: {
-    title: `Friday Challenges`,
+    title: `Friday Challenge`,
     algolia: {
       appId: process.env.ALGOLIA_APPID,
       apiKey: process.env.ALGOLIA_APIKEY,
@@ -107,8 +107,17 @@ module.exports = {
       options: {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_APIKEY,
-        queries,
-      },
+        queries
+      }
     },
-  ],
-}
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Pacifico\:cursive`, // you can also specify font weights and styles
+          `Quicksand`
+        ]
+      }
+    }
+  ]
+};

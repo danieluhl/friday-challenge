@@ -32,13 +32,14 @@ export const Container = styled.div`
 `;
 
 export const Link = styled(GatsbyLink)`
-  color: white;
   text-decoration: none;
 `
 
 export const Button = styled.button`
+  color: #fff;
   background-color: ${props => props.theme.background};
   padding: 1em 2em;
+  font-size: 15px;
   transition: background-color .2s;
   &:hover {
     background-color: ${props => props.theme.backgroundHover};

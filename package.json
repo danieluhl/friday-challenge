@@ -11,6 +11,7 @@
     "dompurify": "^1.0.8",
     "gatsby": "^2.0.19",
     "gatsby-plugin-algolia": "^0.3.0",
+    "gatsby-plugin-google-fonts": "^0.0.4",
     "gatsby-plugin-manifest": "^2.0.5",
     "gatsby-plugin-offline": "^2.0.5",
     "gatsby-plugin-react-helmet": "^3.0.0",
