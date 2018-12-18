@@ -1,43 +1,37 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
-
-import Layout from '../components/layout';
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/layout'
 
 const IndexPage = ({ data }) => {
-  const { edges } = data.allMarkdownRemark;
+  const { frontmatter, html } = data.allMarkdownRemark.edges[0].node
+  const { title, date } = frontmatter
   return (
     <Layout>
-      <h1>Archive</h1>
-      {edges.map(({ node }) => (
-        <Link to={node.fields.slug} key={node.frontmatter.title}>
-          <h3>
-            <span>[{node.frontmatter.date}]</span> {node.frontmatter.title}
-          </h3>
-        </Link>
-      ))}
+      <h1>The latest challenge: {title}</h1>
+      <div>{date}</div>
+      <section dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
 
 export const indexQuery = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      limit: 1
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       totalCount
       edges {
         node {
-          id
+          html
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
           }
-          fields {
-            slug
-          }
-          excerpt
         }
       }
     }
   }
-`;
+`

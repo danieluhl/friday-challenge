@@ -1,9 +1,15 @@
 require(`dotenv`).config({
-  path: `.env`
-});
+  path: `.env`,
+})
 
-if (!process.env.ALGOLIA_APPID || !process.env.ALGOLIA_APIKEY || !process.env.ALGOLIA_ADMIN_APIKEY) {
-  throw new Error('Missing Algolia config')
+if (
+  !process.env.ALGOLIA_APPID ||
+  !process.env.ALGOLIA_APIKEY ||
+  !process.env.ALGOLIA_ADMIN_APIKEY
+) {
+  throw new Error(
+    'Missing Algolia environment variables (.env file): ALGOLIA_APPID, ALGOLIA_APIKEY, ALGOLIA_ADMIN_APIKEY'
+  )
 }
 
 // gatsby-config.js
@@ -24,43 +30,59 @@ const query = `{
       }
     }
   }
-}`;
+}`
 
 const queries = [
   {
     query,
     indexName: `challenges`,
-    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => {
-      const { frontmatter, fields, plainText } = node
-      const { title, date, language, tags } = frontmatter
-      const { slug } = fields
-      return {
-        date,
-        language,
-        objectID: slug,
-        plainText,
-        slug,
-        tags,
-        title
-      }
-    }),
-  }
-];
+    transformer: ({ data }) =>
+      data.allMarkdownRemark.edges.map(({ node }) => {
+        const { frontmatter, fields, plainText } = node
+        const { title, date, language, tags } = frontmatter
+        const { slug } = fields
+        return {
+          date,
+          language,
+          objectID: slug,
+          plainText,
+          slug,
+          tags,
+          title,
+        }
+      }),
+  },
+]
 
 module.exports = {
   siteMetadata: {
-    title: `Friday Challenges`,
+    title: `Friday Challenge`,
     algolia: {
       appId: process.env.ALGOLIA_APPID,
       apiKey: process.env.ALGOLIA_APIKEY,
-      indexName: `challenges`
-  }
+      indexName: `challenges`,
+    },
+    menuLinks: [
+      {
+        name: 'home',
+        link: '/',
+      },
+      {
+        name: 'about',
+        link: '/about',
+      },
+      {
+        name: 'archives',
+        link: '/archives',
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-remark-plaintext`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -70,15 +92,15 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
-      }
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/src/`
-      }
+        path: `${__dirname}/src/`,
+      },
     },
     {
       resolve: `gatsby-plugin-algolia`,
@@ -86,6 +108,15 @@ module.exports = {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_APIKEY,
         queries
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Pacifico\:cursive`, // you can also specify font weights and styles
+          `Quicksand`
+        ]
       }
     }
   ]
