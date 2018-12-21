@@ -6,7 +6,6 @@ import React, { Component } from 'react'
 import netlifyIdentity from 'netlify-identity-widget'
 import {
   Link,
-  Container,
 } from './layout-constants';
 import {
   PageTitle
