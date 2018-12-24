@@ -12,7 +12,7 @@ import {
 import './algolia.css'
 
 // Min number of characters needed to trigger search results
-const MIN_CHAR_COUNT = 4
+const MIN_CHAR_COUNT = 0
 
 const Result = ({ hit }) => (
   <a style={{ marginTop: '10px' }} href={hit.slug}>
