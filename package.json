@@ -4,11 +4,15 @@
   "version": "1.0.0",
   "contributors": [
     "Dan Uhl <duhl@wayfair.com>",
-    "Spencer Sanchez <spsanchez@wayfair.com>"
+    "Spencer Sanchez <spsanchez@wayfair.com>",
+    "Justin Cox <jcox2@wayfair.com"
   ],
   "dependencies": {
+    "airtable": "^0.5.8",
+    "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.9.4",
     "dompurify": "^1.0.8",
+    "dotenv": "^6.2.0",
     "gatsby": "^2.0.19",
     "gatsby-plugin-algolia": "^0.3.0",
     "gatsby-plugin-google-fonts": "^0.0.4",
@@ -20,6 +24,7 @@
     "gatsby-transformer-remark": "^2.1.7",
     "gatsby-transformer-remark-plaintext": "^1.0.2",
     "netlify-identity-widget": "^1.5.2",
+    "netlify-lambda": "^1.1.1",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
@@ -34,7 +39,8 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write '**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lambda": "./node_modules/.bin/netlify-lambda serve \"./functions/\""
   },
   "devDependencies": {
     "prettier": "^1.14.2"

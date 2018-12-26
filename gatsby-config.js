@@ -12,6 +12,16 @@ if (
   )
 }
 
+if (
+  !process.env.AIRTABLE_APPID ||
+  !process.env.AIRTABLE_APIKEY ||
+  !process.env.NETLIFY_LAMBDAURL
+) {
+  throw new Error(
+    'Missing AirTable/Lambda environment variables (.env file): AIRTABLE_APPID, AIRTABLE_APIKEY, NETLIFY_LAMBDAURL'
+  )
+}
+
 // gatsby-config.js
 const query = `{
   allMarkdownRemark {
@@ -76,6 +86,11 @@ module.exports = {
         link: '/archives',
       },
     ],
+    airtable: {
+      appId: process.env.AIRTABLE_APPID,
+      apiKey: process.env.AIRTABLE_APIKEY,
+      functionsUrl: process.env.NETLIFY_LAMBDAURL,
+    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -107,17 +122,17 @@ module.exports = {
       options: {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_APIKEY,
-        queries
-      }
+        queries,
+      },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
           `Pacifico\:cursive`, // you can also specify font weights and styles
-          `Quicksand`
-        ]
-      }
-    }
-  ]
-};
+          `Quicksand`,
+        ],
+      },
+    },
+  ],
+}
