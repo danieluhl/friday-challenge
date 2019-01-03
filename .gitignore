@@ -111,6 +111,9 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# Netlify cache
+# .netlify/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
