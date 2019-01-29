@@ -17,6 +17,7 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
+            identityUrl
             algolia {
               appId
               apiKey
@@ -32,7 +33,7 @@ const Layout = ({ children }) => (
     `}
     render={({
       site: {
-        siteMetadata: { title, algolia, menuLinks },
+        siteMetadata: { title, identityUrl, algolia, menuLinks },
       },
     }) => (
       <>
@@ -45,7 +46,7 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header siteTitle={title} />
+        <Header siteTitle={title} identityUrl={identityUrl} />
         <SiteNav links={menuLinks} />
         <Search {...algolia} />
         <Container>
