@@ -67,6 +67,7 @@ const queries = [
 module.exports = {
   siteMetadata: {
     title: `Friday Challenge`,
+    identityUrl: `https://friday-challenge.com/.netlify/identity`,
     algolia: {
       appId: process.env.ALGOLIA_APPID,
       apiKey: process.env.ALGOLIA_APIKEY,

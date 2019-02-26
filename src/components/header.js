@@ -113,8 +113,9 @@ const Navbar = styled.div`
 
 class HeaderComponent extends Component {
   componentDidMount() {
+    const { identityUrl } = this.props
     netlifyIdentity.init({
-      APIUrl: 'https://www.friday-challenge.com/.netlify/identity',
+      APIUrl: identityUrl,
     })
     netlifyIdentity.on('login', user => {
       this.setState({ user })

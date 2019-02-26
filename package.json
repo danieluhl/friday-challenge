@@ -31,13 +31,11 @@
     "react-instantsearch": "^5.3.2",
     "styled-components": "^4.1.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "yarn install && gatsby build",
+    "dev": "gatsby develop",
     "format": "prettier --write '**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lambda": "./node_modules/.bin/netlify-lambda serve \"./functions/\""
