@@ -1,0 +1,11 @@
+.ais-RefinementList-list {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ais-RefinementList-label {
+  padding: 0.3rem 0.5rem;
+}
+.ais-RefinementList-labelText {
+  padding: 0.3rem 0.5rem;
+}
