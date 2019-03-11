@@ -1,59 +1,80 @@
-import React from 'react';
-import { Highlight, Hits, InstantSearch, SearchBox, Stats, RefinementList } from 'react-instantsearch-dom';
+import React, { Component } from 'react'
+import {
+  Highlight,
+  Hits,
+  InstantSearch,
+  SearchBox,
+  Stats,
+  RefinementList,
+} from 'react-instantsearch-dom'
+import styled from 'styled-components'
 
-import './algolia.css';
-import './search.css';
+import AlgoliaLogo from './AlgoliaLogo'
+
+import './algolia.css'
+import './search.css'
 
 // Min number of characters needed to trigger search results
-const MIN_CHAR_COUNT = 0;
+const MIN_CHAR_COUNT = 0
+
+const StyledAlgoliaLogoWrapper = styled.div`
+  margin: 0.5rem 0;
+  text-align: right;
+`
+const StyledSearchWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+const StyledResult = styled.a`
+  margin-top: 10px;
+`
+const StyledHighlight = styled(Highlight)`
+  display: block;
+`
 
 const Result = ({ hit }) => (
-  <a style={{ marginTop: '10px' }} href={hit.slug}>
-    <div>
-      <Highlight attribute="title" hit={hit} />
-    </div>
-    <Highlight attribute="date" hit={hit} />
-    <Highlight attribute="tags" hit={hit} />
-    <small>{hit.date}</small>
-  </a>
-);
+  <StyledResult href={hit.slug}>
+    <StyledHighlight attribute="title" hit={hit} />
+    <StyledHighlight attribute="date" hit={hit} />
+    <StyledHighlight attribute="tags" hit={hit} />
+  </StyledResult>
+)
 
-class Search extends React.Component {
+class Search extends Component {
   state = {
-    showResults: false
-  };
+    shouldShowResults: false,
+  }
 
   handleChange = e => {
     this.setState({
-      showResults: e.target.value.length > MIN_CHAR_COUNT
-    });
-  };
+      shouldShowResults: e.target.value.length > MIN_CHAR_COUNT,
+    })
+  }
 
-  handleReset = () => this.setState({ showResults: false });
+  handleReset = () => this.setState({ shouldShowResults: false })
 
   render() {
-    const { appId, apiKey, indexName } = this.props;
+    const { appId, apiKey, indexName } = this.props
+    const { shouldShowResults } = this.state
     return (
       <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '1.45rem 1.0875rem'
-          }}
-        >
+        <StyledSearchWrapper>
           <RefinementList attribute="language" />
           <SearchBox onChange={this.handleChange} onReset={this.handleReset} />
-          {this.state.showResults && (
-            <div>
+          <StyledAlgoliaLogoWrapper>
+            <AlgoliaLogo />
+          </StyledAlgoliaLogoWrapper>
+          {shouldShowResults && (
+            <>
               <Hits hitComponent={Result} />
               <Stats />
-            </div>
+            </>
           )}
-        </div>
+        </StyledSearchWrapper>
       </InstantSearch>
-    );
+    )
   }
 }
 
-export default Search;
+export default Search
