@@ -1,0 +1,4 @@
+[build]
+  # This is where the built functions files reside. This has to be different
+  # from where `netlify-lambda` discovers the files.
+  Functions = "./.netlify/functions/"
